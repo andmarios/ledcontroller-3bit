@@ -78,8 +78,8 @@ int main(int argc,char** argv)
     0 1 0 green  0x3
     0 1 1 aqua   0x4
     1 0 1 purple 0x5
-    1 1 0 yellow 0x6
-    1 1 1 white  0x7
+    1 1 0 yellow 0x6 (more of a mustard - green color)
+    1 1 1 white  0x7 (a very blue-ish white)
 */
  if ( strcmp(argv[1],"blue") == 0 )
  {
