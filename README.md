@@ -28,8 +28,10 @@ A Linux command line utility to control usb mail notifiers identified as:
 + libusb:1 or libusb-1.0-dev, depending on your distribution
 + a system which can compile binaries (package build-essentials for Debian based distributions)
 
+## Hardware: 
 
-I think [this is my notifier](http://www.andmarios.com/links/mail-usb-notifier) but I can't be sure as I bought a couple of years ago from eBay.
+I think [this is my notifier](http://www.andmarios.com/links/mail-usb-notifier) but I can't be
+sure as I bought it a couple of years ago from eBay.
 
 ---
 
