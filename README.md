@@ -43,5 +43,4 @@ as the original code only supported the 3 basic colors.
 As jmrobles' website is in Spanish, his code on dropbox and I had a difficult time finding
 it, I uploaded it to GitHub.
 
-The code is distributed under the terms of the GNU General Public License v3. You can find more information inside `main.c`
-
+The code is distributed under the terms of the GNU General Public License v3. You can find more information inside `main.c`.
