@@ -1,0 +1,28 @@
+#!/bin/bash
+
+LOWTEMP=46
+HIGHTEMP=53
+REFRESHRATE=1
+LEDCONTROLLER="/usr/bin/ledcontroller"
+
+
+while (true); do
+
+  temperature="$(sensors|grep 'id 0'|sed -e 's/\.0.*//' -e 's/.*+//')"
+
+  if (( "$temperature" <= "$LOWTEMP" )); then
+
+    $LEDCONTROLLER blue;
+
+  elif (( "$temperature" < "$HIGHTEMP" )); then
+
+    $LEDCONTROLLER green;
+
+  else $LEDCONTROLLER red;
+
+  fi;
+
+  sleep "$REFRESHRATE";
+
+done
+
