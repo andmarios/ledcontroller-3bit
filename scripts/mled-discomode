@@ -1,0 +1,16 @@
+#!/bin/bash
+
+REFRESHRATE=1
+LEDCONTROLLER="/usr/bin/ledcontroller"
+
+while (true); do
+
+  for discoColor in blue red green aqua purple yellow white; do
+
+    $LEDCONTROLLER $discoColor
+
+    sleep "$REFRESHRATE"
+
+  done
+
+done
