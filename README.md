@@ -5,6 +5,10 @@ A Linux command line utility to control usb mail notifiers identified as:
     $ lsusb
     Bus 001 Device 010: ID 1294:1320 RISO KAGAKU CORP.
 
+
+Inside the scripts folder you will find some simple bash scripts you can use to control the notifier.
+For example the script `mled-cputemp` will make it respond to your CPU's temperature.
+
 ### Get and compile:
 
     $ git clone https://github.com/andmarios/ledcontroller-3bit.git
