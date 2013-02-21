@@ -35,5 +35,6 @@ They actually work better than common HDD activity LEDs because they are based o
 second periods (adjustable).
 
 `mled-iowait` has 3 levels, so you get only to set a low and a high threshold.
+
 `mled-iowaitdetailed` has 6 levels of activity, so you can set 5 thresholds. Also below the lowest threshold,
 it sets the notifier to off, which turns to be a good approach.
