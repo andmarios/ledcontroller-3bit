@@ -137,6 +137,7 @@ int main(int argc,char** argv)
  data[4] = 0x4;
 
  int dummy;
+ libusb_claim_interface(devh,0);
  ret =  libusb_interrupt_transfer(devh,0x2,data,5,&dummy,0);
  if ( ret < 0 ) 
  {
