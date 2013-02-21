@@ -1,0 +1,44 @@
+#!/bin/bash
+
+THRESH1="1.00"
+THRESH2="5.00"
+THRESH3="20.00"
+THRESH4="40.00"
+THRESH5="80.00"
+REFRESHRATE=1
+
+LEDCONTROLLER="/usr/bin/ledcontroller"
+
+
+iostat -c "$REFRESHRATE" | while read iostatOutput; do
+
+  iowaitPercent="$(echo "$iostatOutput" | grep -vE "Linux|avg|^$" | awk '{print $4}')"
+
+  [ -z "$iowaitPercent" ] || \
+  if (( $(bc <<< "$iowaitPercent > $THRESH1") == 0  )); then 
+
+    $LEDCONTROLLER off
+
+  elif (( $(bc <<< "$iowaitPercent > $THRESH2") == 0 )); then
+
+    $LEDCONTROLLER green
+
+  elif (( $(bc <<< "$iowaitPercent > $THRESH3") == 0 )); then
+
+    $LEDCONTROLLER aqua # blue and green
+
+  elif (( $(bc <<< "$iowaitPercent > $THRESH4") == 0 )); then
+
+    $LEDCONTROLLER blue
+
+  elif (( $(bc <<< "$iowaitPercent > $THRESH5") == 0 )); then
+
+    $LEDCONTROLLER purple # red and blue
+
+  else
+
+    $LEDCONTROLLER red
+
+  fi
+
+done
