@@ -1,41 +1,70 @@
 #!/bin/bash
 
+LOWTHRESHOLD="1.01"
+HIGHTHRESHOLD="30.2"
 REFRESHRATE=1
+
 LEDCONTROLLER="/usr/bin/ledcontroller"
 
-iowaitCounter="$(grep 'cpu ' /proc/stat | cut -f 9 -d ' ')"
-$LEDCONTROLLER blue
-ledcolor="blue"
 
-while (true); do
+iostat -c "$REFRESHRATE" | while read iostatOutput; do
 
-  iowaitTemp="$(grep 'cpu ' /proc/stat | cut -f 9 -d ' ')"
+  iowaitPercent="$(echo "$iostatOutput" | grep -vE "Linux|avg|^$" | awk '{print $4}')"
 
-#  echo "iowaitCounter=$iowaitCounter, iowaitTemp=$iowaitTemp"
+  [ -z "$iowaitPercent" ] || \
+  if (( $(bc <<< "$iowaitPercent > $LOWTHRESHOLD") == 0  )); then 
 
-  if (( "$iowaitCounter" == "$iowaitTemp" )); then
+    $LEDCONTROLLER blue
 
-    if [ "$ledcolor" != "blue" ]; then
+  elif (( $(bc <<< "$iowaitPercent > $HIGHTHRESHOLD") == 0 )); then
 
-      $LEDCONTROLLER blue
-      ledcolor="blue"
-
-    fi
+    $LEDCONTROLLER green
 
   else
 
-     iowaitCounter="$iowaitTemp"
-
-     if [ "$ledcolor" != "red" ]; then
-
-       $LEDCONTROLLER red;
-       ledcolor="red"
-
-     fi
+    $LEDCONTROLLER red
 
   fi
 
-  sleep "$REFRESHRATE";
-
 done
+
+
+# This is an older version of the code, which used /proc/stats to do a similar job.
+
+#iowaitCounter="$(grep 'cpu ' /proc/stat | cut -f 9 -d ' ')"
+#$LEDCONTROLLER blue
+#ledcolor="blue"
+#
+#while (true); do
+#
+#  iowaitTemp="$(grep 'cpu ' /proc/stat | cut -f 9 -d ' ')"
+#
+##  echo "iowaitCounter=$iowaitCounter, iowaitTemp=$iowaitTemp"
+#
+#  if (( "$iowaitCounter" == "$iowaitTemp" )); then
+#
+#    if [ "$ledcolor" != "blue" ]; then
+#
+#      $LEDCONTROLLER blue
+#      ledcolor="blue"
+#
+#    fi
+#
+#  else
+#
+#     iowaitCounter="$iowaitTemp"
+#
+#     if [ "$ledcolor" != "red" ]; then
+#
+#       $LEDCONTROLLER red;
+#       ledcolor="red"
+#
+#     fi
+#
+#  fi
+#
+#  sleep "$REFRESHRATE";
+#
+#done
+
 
