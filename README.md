@@ -41,12 +41,11 @@ sure as I bought it a couple of years ago from eBay.
 
 ## Copyright
 
-This code is a fork of the ledcontroller code by jmrobles <http://robleshermoso.wordpress.com>.
+This code (files `main.c` and `Makefile`) is a fork of the ledcontroller code by jmrobles <http://robleshermoso.wordpress.com>.
 
-My contribution to the code was trivial. I added support for all the 7 colors of the notifier
-as the original code only supported the 3 basic colors.
+My contribution to this code is very small and probably I could never write this on my own.
+I added support for all the 7 colors of the notifier as the original code only supported the
+3 basic colors. Also I hopefully fixed an issue with a warning output at the kernel's log.
 
-As jmrobles' website is in Spanish, his code on dropbox and I had a difficult time finding
-it, I uploaded it to GitHub.
-
-The code is distributed under the terms of the GNU General Public License v3. You can find more information inside `main.c`.
+The code is distributed under the terms of the GNU General Public License v3. You can find more
+information and the original license inside `main.c`.
