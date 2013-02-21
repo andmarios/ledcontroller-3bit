@@ -1,0 +1,41 @@
+#!/bin/bash
+
+REFRESHRATE=1
+LEDCONTROLLER="/usr/bin/ledcontroller"
+
+iowaitCounter="$(grep 'cpu ' /proc/stat | cut -f 9 -d ' ')"
+$LEDCONTROLLER blue
+ledcolor="blue"
+
+while (true); do
+
+  iowaitTemp="$(grep 'cpu ' /proc/stat | cut -f 9 -d ' ')"
+
+#  echo "iowaitCounter=$iowaitCounter, iowaitTemp=$iowaitTemp"
+
+  if (( "$iowaitCounter" == "$iowaitTemp" )); then
+
+    if [ "$ledcolor" != "blue" ]; then
+
+      $LEDCONTROLLER blue
+      ledcolor="blue"
+
+    fi
+
+  else
+
+     iowaitCounter="$iowaitTemp"
+
+     if [ "$ledcolor" != "red" ]; then
+
+       $LEDCONTROLLER red;
+       ledcolor="red"
+
+     fi
+
+  fi
+
+  sleep "$REFRESHRATE";
+
+done
+
